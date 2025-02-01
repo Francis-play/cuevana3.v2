@@ -1,11 +1,11 @@
 {
-  "name": "cuevana3",
+  "name": "cuevana3.v2",
   "version": "1.0.4",
   "description": "Cuevana3 scraper is a content provider of the latest in the world of cinema with sub in Latin Spanish, subtitled and free, in addition to providing different complementary information.",
-  "main": "./src/api.js",
+  "main": "./src/app.js",
   "types": "./types/api.d.ts",
   "scripts": {
-    "dev": "nodemon src/api.js"
+    "dev": "nodemon src/app.js"
   },
   "keywords": [
     "cuevana3-scraper",
@@ -14,9 +14,9 @@
     "scraper",
     "cuevana 3"
   ],
-  "author": "Carlos Fernández <carlosfdezb@gmail.com>",
+  "author": "FV",
   "contributors": [
-    "Carlos Fernández (https://github.com/carlosfdezb)"
+    "FV"
   ],
   "license": "MIT",
   "dependencies": {
@@ -30,10 +30,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/carlosfdezb/cuevana3.git"
+    "url": "git+https://github.com/Francis-play/cuevana3.v2.git"
   },
   "bugs": {
-    "url": "https://github.com/carlosfdezb/cuevana3/issues"
+    "url": "https://github.com/Francis-play/cuevana3.v2/issues"
   },
-  "homepage": "https://github.com/carlosfdezb/cuevana3#readme"
+  "homepage": "https://github.com/Francis-play/cuevana3.v2#readme"
 }
