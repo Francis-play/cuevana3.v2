@@ -9,8 +9,9 @@ module.exports = {
   ],
   //#tabserie-1: LastAddedSeries, #tabserie-2: getSeriesPremiere, #tabserie-3: getSeriesRanking, #tabserie-4: getSeriesMostViewed, index(4): lastEpisodes
   SERIES: [
+    "series",
     "#dle-content",
-    "#aa-wp > div.bd > div.TpRwCont.cont-page > main > section:nth-child(1)",
+    "#aa-wp > div.bd > div.TpRwCont.cont-page > main > section:nth-child(1)"
   ],
  GENRES: [
     "accion",
