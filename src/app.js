@@ -1,5 +1,5 @@
 const express = require('express');
-const { getMovies, getSeries, getDetail, getByGenre, getByActor, getSearch, getLinks, getDownload, getTrailer } = require('./api.js');
+const { getMovies, getSeries, getDetail, getByGenre, getByActor, getSearch, getLinks, getDownload, getTrailer } = require('./api');
 
 const app = express();
 const port = 3000;
