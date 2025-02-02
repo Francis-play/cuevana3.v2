@@ -30,10 +30,10 @@ app.get('/series', async (req, res) => {
 });
 
 // Endpoint para obtener detalle de un ID
-app.get('/detail/:id', async (req, res) => {
-  const { id } = req.params;  // ID enviado en la URL
+app.get('/detail/:id/:episode?', async (req, res) => {
+  const { id, episode } = req.params;  // ID enviado en la URL, episode (opcional)
   try {
-    const detail = await getDetail(id);
+    const detail = episode ? await getDetail(id, episode) : await getDetail(id);
     res.json(detail);
   } catch (error) {
     res.status(500).json({ error: 'Error obteniendo detalle' });
@@ -86,10 +86,10 @@ app.get('/links/:id', async (req, res) => {
 });
 
 // Endpoint para obtener descarga
-app.get('/download/:id', async (req, res) => {
-  const { id } = req.params;  // ID enviado en la URL
+app.get('/download/:id/:episode?', async (req, res) => {
+  const { id, episode } = req.params;  // ID enviado en la URL, episode (opcional)
   try {
-    const downloadLinks = await getDownload(id);
+    const downloadLinks = episode ? await getDownload(id, episode) : await getDownload(id);
     res.json(downloadLinks);
   } catch (error) {
     res.status(500).json({ error: 'Error obteniendo links de descarga' });
