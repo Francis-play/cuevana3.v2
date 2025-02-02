@@ -25,7 +25,7 @@ const getMovies = async(type, page = '') =>{
     promises.push({
       id: id || null,
       title: title || null,
-      poster: poster || null,
+      poster: poster ? `${BASE_URL}${poster}` : null,
       year: year || null,
       sypnosis: sypnosis || null,
       rating: rating || null,
@@ -61,7 +61,7 @@ const getSeries = async(type) =>{
       promises.push({
         id: id || null,
         title: title || null,
-        poster: poster || null,
+        poster: poster ? `${BASE_URL}${poster}` : null,
         year: year || null,
         sypnosis: sypnosis || null,
         rating: rating || null,
@@ -79,15 +79,16 @@ const getSeries = async(type) =>{
       promises.push({
         id: id || null,
         episode: episode || null,
-        poster: poster || null
+        poster: poster ? `${BASE_URL}${poster}` : null
       });
     }
   })
   return await Promise.all(promises);
 };
 
-const getDetail = async(id) => {
-  const res = await cloudscraper(`${BASE_URL}${id}` , {method: 'GET'});
+const getDetail = async(id, episode=null) => {
+  const url = episode ? `${BASE_URL}${id}/${episode}` : `${BASE_URL}${id}`;
+  const res = await cloudscraper(url , {method: 'GET'});
   const body = await res;
   const $ = cheerio.load(body);
   const promises = [];
@@ -97,7 +98,7 @@ const getDetail = async(id) => {
   const title = $('#aa-wp > div.bd > div.backdrop > article > header > h1').text();
   const original_title = $('#aa-wp > div.bd > div.backdrop > article > header > h2').text();
   const sypnosis= $('#aa-wp > div.bd > div.backdrop > article > div.Description > p').text();
-  const year = $('#aa-wp > div.bd > div.backdrop > article > footer > p > span:nth-child(2)').text();
+  const year = $('#aa-wp > div.bd > div.backdrop > article > footer > p > span:nth-child(2) > a').text();
   const duration = $('#aa-wp > div.bd > div.backdrop > article > footer > p > span:nth-child(1)').text();
   const rating = $('#post-ratings-5556 > strong:nth-child(3)').text();
   const director = $('#MvTb-Info > ul > li:nth-child(1) > span').text().split(', ');
@@ -113,7 +114,7 @@ const getDetail = async(id) => {
     })
   })
   const cast = [];
-  $(`#MvTb-Info > ul > li.AAIco-adjust.loadactor > a`).each((index , element) =>{
+  $(`#MvTb-Info > ul > li.AAIco-adjust > a`).each((index , element) =>{
     const $element = $(element);
     const id = $element.attr('href').split('/')[4];
     const name = $element.text().replace(',','');
@@ -151,7 +152,7 @@ const getDetail = async(id) => {
 
     promises.push({
       id: id,
-      poster: poster || null,
+      poster: poster ? `${BASE_URL}${poster}` : null,
       background: background || null,
       title: title || null,
       original_title: original_title || null,
@@ -192,7 +193,7 @@ const getDetail = async(id) => {
 
     promises.push({
       id: id,
-      poster: poster || null,
+      poster: poster ? `${BASE_URL}${poster}` : null,
       background: background || null,
       title: title || null,
       original_title: original_title || null,
@@ -220,7 +221,7 @@ const getByGenre = async(type, page) => {
   const $ = cheerio.load(body);
   const promises = [];
 
-  $(`#aa-wp > div > div.TpRwCont.cont > main > ul > li`).each((index , element) =>{
+  $(`#aa-wp > div.bd > div.TpRwCont.cont-page > main > ul > li`).each((index , element) =>{
     const $element = $(element);
     const id = $element.find('div.TPost.C > a').attr('href').split(BASE_URL_EXTENSION)[1];
     const title = $element.find('div.TPost.C > a > h2').text();
@@ -236,7 +237,7 @@ const getByGenre = async(type, page) => {
     promises.push({
       id: id || null,
       title: title || null,
-      poster: poster || null,
+      poster: poster ? `${BASE_URL}${poster}` : null,
       year: year || null,
       sypnosis: sypnosis || null,
       rating: rating || null,
@@ -271,7 +272,7 @@ const getByActor = async(id, page) => {
     promises.push({
       id: id || null,
       title: title || null,
-      poster: poster || null,
+      poster: poster ? `${BASE_URL}${poster}` : null,
       year: year || null,
       sypnosis: sypnosis || null,
       rating: rating || null,
@@ -306,7 +307,7 @@ const getSearch = async(query, page) => {
     promises.push({
       id: id || null,
       title: title || null,
-      poster: poster || null,
+      poster: poster ? `${BASE_URL}${poster}` : null,
       year: year || null,
       sypnosis: sypnosis || null,
       rating: rating || null,
@@ -362,8 +363,9 @@ const getLinks = async(id) => {
   return await Promise.all(promises);
 }
 
-const getDownload = async(id) => {
-  const res = await cloudscraper(`${BASE_URL}${id}` , {method: 'GET'});
+const getDownload = async(id, episode=null) => {
+  const url = episode ? `${BASE_URL}${id}/${episode}` : `${BASE_URL}${id}`;
+  const res = await cloudscraper(url , {method: 'GET'});
   const body = await res;
   const $ = cheerio.load(body);
   const promises = [];
